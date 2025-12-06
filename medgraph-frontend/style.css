@@ -1,0 +1,205 @@
+/* style.css - Clean, modern layout for MedGraph */
+:root{
+  --bg:#f4f8ff;
+  --card:#ffffff;
+  --muted:#6c757d;
+  --accent:#1f78ff;
+  --panel-radius:14px;
+  --soft-shadow: 0 6px 18px rgba(31,119,255,0.08);
+  --glass: rgba(255,255,255,0.85);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* page */
+body{
+  margin:0;
+  background: linear-gradient(180deg,#eaf4ff 0%, #f6fbff 100%);
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* header */
+header{
+  background: linear-gradient(90deg, #1f78ff 0%, #3aa0ff 100%);
+  color:white;
+  padding:28px 40px;
+  border-bottom-left-radius:22px;
+  border-bottom-right-radius:22px;
+  box-shadow: 0 10px 30px rgba(31,120,255,0.08);
+  margin-bottom:18px;
+}
+header h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:0.2px;
+  text-align:center;
+}
+
+/* controls */
+.controls{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 28px;
+  margin: 12px 28px;
+  background:var(--glass);
+  border-radius:12px;
+  box-shadow: var(--soft-shadow);
+  flex-wrap:wrap;
+}
+
+/* legend buttons */
+.filterBtn, .btn {
+  border: none;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+.filterBtn { font-size:14px; }
+.btn { background:#1976d2; color:#fff; }
+
+/* file input lightly styled */
+#csvFile {
+  margin-left:6px;
+}
+
+/* small controls */
+.controls select, .controls input[type="text"], .controls input[type="search"], .controls input[type="file"] {
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #dde7f2;
+  background:#fff;
+  font-size:14px;
+}
+
+/* main content - graph + sidebar */
+#main-content{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  margin: 10px 28px 40px 28px;
+}
+
+/* graph card */
+
+  /* ... autocomplete styles ... */
+  /* Make graph area clean & modern */
+#graph {
+  width: 100%;
+  height: 72vh;
+  background: #ffffff;
+  
+  border-radius: 20px;
+  margin-top: 15px;
+  padding: 8px;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+  transition: 0.3s ease;
+}
+
+/* Soft hover effect */
+#graph:hover {
+  box-shadow: 0 12px 45px rgba(0,0,0,0.18);
+}
+
+/* Make center content look balanced */
+.graph-wrapper {
+  width: 95%;
+  margin: auto;
+  margin-top: 15px;
+}
+
+
+
+/* sidebar */
+#info{
+  width:320px;
+  background:var(--card);
+  padding:18px;
+  border-radius:14px;
+  box-shadow: 0 10px 30px rgba(20,40,80,0.04);
+  border:1px solid rgba(20,40,80,0.03);
+}
+#info h3{ margin-top:0; }
+#nodeDetails { line-height:1.45; color:#222; }
+
+/* node details list styling */
+#nodeDetails ul { padding-left:18px; margin:6px 0; }
+#nodeDetails li { margin:6px 0; color:#1f3b63; }
+
+/* small muted */
+.muted { color:var(--muted); font-size:14px; }
+
+/* search dropdown (positioned next to input) */
+#searchDropdown{
+  position:absolute;
+  background:#fff;
+  border-radius:8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  max-height:240px;
+  overflow:auto;
+  width:260px;
+  display:none;
+  z-index:50;
+  margin-top:6px;
+  padding:6px 0;
+}
+#searchDropdown li{
+  list-style:none;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:14px;
+  color:#123;
+}
+#searchDropdown li:hover{ background:#f0f8ff; }
+
+.footer-glass {
+  width: 100%;
+  padding: 18px 30px;
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 -2px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0a2a43;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 18px 18px 0 0;
+}
+
+.footer-left .logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b7bba;
+}
+
+.footer-left .tagline {
+  margin-left: 10px;
+  color: #333;
+  font-size: 14px;
+}
+
+.footer-right span {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #0a2a43;
+  opacity: 0.75;
+}
+
+.footer-glass:hover {
+  box-shadow: 0 -4px 35px rgba(0, 0, 0, 0.25);
+  transition: 0.3s ease;
+}
+
+
+/* responsive */
+@media (max-width:1000px){
+  #main-content{ flex-direction:column; }
+  #info{ width:100%; }
+  #graph{ min-height:480px; }
+}

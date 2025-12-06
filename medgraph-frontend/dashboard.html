@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MedGraph Dashboard</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #d9e8ff, #f1f6ff);
+  }
+
+  /* HEADER */
+  .header {
+    width: 100%;
+    padding: 25px 0;
+    background: #2b7bba;
+    color: white;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  }
+
+  /* CENTER CARD */
+  .container {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    background: rgba(255,255,255,0.92);
+    padding: 40px 50px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+
+  .title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    color: #2b7bba;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+
+  /* BUTTON GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px;
+    font-size: 20px;
+    background: #2b7bba;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    box-shadow: 0 5px 18px rgba(43,123,186,0.25);
+  }
+
+  .btn:hover {
+    background: #1b5d8e;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  }
+
+  /* ICON */
+  .btn span {
+    font-size: 26px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  ⭐ MedGraph Dashboard ⭐
+</div>
+
+<div class="container">
+  
+  <div class="title">Welcome to MedGraph</div>
+  <div class="subtitle">A smart knowledge graph for patients, diseases & treatments.</div>
+
+  <div class="grid">
+    <a href="index.html" class="btn"><span>🧠</span> View Medical Graph</a>
+
+    <a href="addPatient.html" class="btn"><span>➕</span> Add New Patient</a>
+
+    <button id="btnSimilarity" class="btn"><span>🔗</span> Find Similar Patients</button>
+
+    <button id="btnRisk" class="btn"><span>🔥</span> Update Risk Scores</button>
+
+    <a href="import.html" class="btn"><span>📊</span> Import Data (CSV)</a>
+
+  </div>
+
+</div>
+
+<script>
+  document.getElementById("btnSimilarity").addEventListener("click", () => {
+    fetch("http://localhost:3000/calculateSimilarity", { method: "POST" })
+      .then(r => r.json())
+      .then(msg => alert(msg.message))
+      .catch(() => alert("Similarity error"));
+  });
+
+  document.getElementById("btnRisk").addEventListener("click", () => {
+    fetch("http://localhost:3000/calculateRisk", { method: "POST" })
+      .then(r => r.json())
+      .then(msg => alert(msg.message))
+      .catch(() => alert("Risk update error"));
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Import CSV – MedGraph</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 700px;
+    margin: 70px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  h1 {
+    color: #2b7bba;
+    font-size: 38px;
+  }
+
+  .btn {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: #2b7bba;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+  }
+
+  a {
+    display: block;
+    margin-top: 20px;
+    color: #2b7bba;
+    font-size: 18px;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Import CSV</h1>
+  <p>Select a patient CSV file to upload into MedGraph.</p>
+
+  <input type="file" id="csvFile" accept=".csv"><br>
+
+  <button class="btn" id="uploadBtn">Upload CSV</button>
+
+  <a href="dashboard.html">← Back to Dashboard</a>
+</div>
+
+<script>
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+  const fileInput = document.getElementById("csvFile");
+  if (!fileInput.files.length) {
+    alert("Please choose a CSV file first!");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const text = await file.text();
+
+  try {
+    const res = await fetch("http://localhost:3000/importPatientsCsv", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ csv: text })
+    });
+
+    const data = await res.json();
+    alert(data.message || "CSV uploaded successfully!");
+  } 
+  catch (err) {
+    console.error(err);
+    alert("Upload failed — check backend console.");
+  }
+});
+</script>
+
+</body>
+</html>

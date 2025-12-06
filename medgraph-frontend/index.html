@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MedGraph Visualizer</title>
+
+  <!-- vis-network -->
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Autocomplete Dropdown */
+    #searchDropdown {
+      position: absolute;
+      z-index: 10;
+      background: #fff;
+      border: 1px solid #ccc;
+      display: none;
+      max-height: 180px;
+      overflow-y: auto;
+      width: 240px;
+      margin-top: 2px;
+      margin-left: 1px;
+      font-size: 17px;
+      list-style: none;
+      padding: 0;
+    }
+    #searchDropdown li {
+      padding: 7px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    #searchDropdown li:hover {
+      background: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MedGraph — Medical Knowledge Graph</h1>
+</header>
+
+<!-- CONTROL PANEL -->
+<div class="controls">
+  
+  <!-- NODE FILTER BUTTONS -->
+  <button class="filterBtn" data-type="Drug" style="background:#1f78ff;color:#fff;">Drug</button>
+  <button class="filterBtn" data-type="Disease" style="background:#e7298a;color:#fff;">Disease</button>
+  <button class="filterBtn" data-type="Gene" style="background:#33a02c;color:#fff;">Gene</button>
+  <button class="filterBtn" data-type="Symptom" style="background:#ff9900;color:#fff;">Symptom</button>
+  <button class="filterBtn" data-type="Patient" style="background:#2b7bba;color:#fff;">Patient</button>
+  <button id="resetNodeFilter" style="background:#6c757d;color:#fff;">Reset Filter</button>
+<button id="btnRisk">Calculate Risk Score</button>
+<button id="btnSimilarity">Find Similar Patients</button>
+
+
+
+ 
+
+  <!-- Layout clean-up -->
+  <button id="btnAutoCluster">Clean Layout</button>
+
+  <!-- Patient Clustering -->
+  <button id="btnCluster">Cluster Patients</button>
+
+  <button id="btnReset">Reset View</button>
+
+  <!-- Relationship type filter -->
+  <select id="filterRelType">
+  <option value="">All Relationships</option>
+  <option value="TREATS">TREATS</option>
+  <option value="CAUSES">CAUSES</option>
+  <option value="INTERACTS_WITH">INTERACTS_WITH</option>
+  <option value="AFFECTS">AFFECTS</option>
+</select>
+
+
+  <!-- Search -->
+  <div style="position:relative;display:inline-block;">
+    <input id="searchInput" placeholder="Search node..." style="width:240px;" />
+    <ul id="searchDropdown"></ul>
+  </div>
+
+  <button id="btnSearch">Find</button>
+  <button id="btnRefresh">Load / Refresh Graph</button>
+
+  <span id="status" class="muted"></span>
+</div>
+
+<!-- LAYOUT: GRAPH + SIDEBAR -->
+<div id="main-content">
+  
+ <div class="graph-wrapper">
+  <div id="graph"></div>
+</div>
+
+
+  <!-- SIDEBAR -->
+  <aside id="info">
+    <h3>Node Info</h3>
+    <div id="nodeDetails">Click a node to see details</div>
+    <hr />
+  </aside>
+
+</div>
+
+
+<script src="script.js"></script>
+<footer class="footer-glass">
+  <div class="footer-left">
+    <span class="logo">🧬 MedGraph</span>
+    <span class="tagline">AI-powered Medical Knowledge Graph</span>
+  </div>
+
+  <div class="footer-right">
+    <span>© 2025 MedGraph</span>
+    <span>Made with in India</span>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
